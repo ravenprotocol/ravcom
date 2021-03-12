@@ -1,5 +1,5 @@
 import redis
-from .constants import RDF_REDIS_HOST, RDF_REDIS_PORT, RDF_REDIS_DB
+from .config import RDF_REDIS_HOST, RDF_REDIS_PORT, RDF_REDIS_DB
 from .utils import Singleton
 
 

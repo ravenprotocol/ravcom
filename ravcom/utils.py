@@ -5,7 +5,7 @@ import json
 import numpy as np
 import sqlalchemy
 
-from .constants import DATA_FILES_PATH, RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, \
+from .config import DATA_FILES_PATH, RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, \
     RDF_MYSQL_PORT, RDF_MYSQL_HOST
 
 
@@ -73,3 +73,15 @@ def delete_create_database():
             print("Database deleted")
             connection.execute("CREATE DATABASE {}".format(RDF_MYSQL_DATABASE))
             print("Database created")
+
+
+def dump_data(data_id, value):
+    """
+    Dump ndarray to file
+    """
+    file_path = os.path.join(DATA_FILES_PATH, "data_{}.pkl".format(data_id))
+    if os.path.exists(file_path):
+        os.remove(file_path)
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    value.dump(file_path)
+    return file_path

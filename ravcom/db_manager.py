@@ -8,7 +8,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, or_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
-from .constants import RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, RDF_MYSQL_PORT, RDF_MYSQL_HOST
+from .config import RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, RDF_MYSQL_PORT, RDF_MYSQL_HOST
 from .utils import delete_data_file, save_data_to_file, Singleton
 
 Base = declarative_base()
