@@ -12,7 +12,7 @@ RDF_MYSQL_HOST = os.environ.get("RDF_MYSQL_HOST", "localhost")
 RDF_MYSQL_PORT = os.environ.get("RDF_MYSQL_PORT", "3306")
 RDF_MYSQL_USER = os.environ.get("RDF_MYSQL_USER", "root")
 RDF_MYSQL_PASSWORD = os.environ.get("RDF_MYSQL_PASSWORD", "password")
-RDF_MYSQL_DATABASE = os.environ.get("RDF_MYSQL_PASSWORD", "rdf")
+RDF_MYSQL_DATABASE = os.environ.get("RDF_MYSQL_DATABASE", "rdf")
 
 QUEUE_HIGH_PRIORITY = "queue:high_priority"
 QUEUE_LOW_PRIORITY = "queue:low_priority"
