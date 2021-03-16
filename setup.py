@@ -15,6 +15,7 @@ setup(
         "aiohttp==3.6.2",
         "async-timeout==3.0.1",
         "python-engineio==3.13.0",
-        "python-socketio==4.5.1"
+        "python-socketio==4.5.1",
+        "requests==2.23.0"
     ],
 )

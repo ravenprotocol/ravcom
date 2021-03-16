@@ -17,3 +17,5 @@ RDF_MYSQL_DATABASE = os.environ.get("RDF_MYSQL_DATABASE", "rdf")
 QUEUE_HIGH_PRIORITY = "queue:high_priority"
 QUEUE_LOW_PRIORITY = "queue:low_priority"
 QUEUE_COMPUTING = "queue:computing"
+
+RAVSOCK_SERVER_URL=os.environ.get("RAVSOCK_SERVER_URL", "http://0.0.0.0:9999")

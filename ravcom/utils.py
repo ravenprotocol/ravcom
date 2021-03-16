@@ -1,12 +1,14 @@
 import contextlib
 import glob
-import os
 import json
+import os
+
 import numpy as np
 import sqlalchemy
 
+from ravcom.socket_client import SocketClient
 from .config import DATA_FILES_PATH, RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, \
-    RDF_MYSQL_PORT, RDF_MYSQL_HOST
+    RDF_MYSQL_PORT, RDF_MYSQL_HOST, RAVSOCK_SERVER_URL
 
 
 def save_data_to_file(data_id, data):
@@ -85,3 +87,8 @@ def dump_data(data_id, value):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     value.dump(file_path)
     return file_path
+
+
+def inform_server():
+    socket_client = SocketClient(server_url=RAVSOCK_SERVER_URL).connect()
+    socket_client.emit("inform_server", data={"type": "event"}, namespace="/ravop")
