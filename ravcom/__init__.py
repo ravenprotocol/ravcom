@@ -12,6 +12,9 @@ from .redis_manager import RavQueue, clear_redis_queues
 from .utils import dump_data, delete_data_file, save_data_to_file, inform_server
 
 
+ravcom = DBManager.Instance()
+
+
 def delete_create_database():
     with sqlalchemy.create_engine('mysql://{}:{}@{}:{}/{}'.format(RDF_MYSQL_USER, RDF_MYSQL_PASSWORD,
                                                                   RDF_MYSQL_HOST, RDF_MYSQL_PORT, "mysql"),
@@ -21,6 +24,8 @@ def delete_create_database():
             print("Database deleted")
             connection.execute("CREATE DATABASE {}".format(RDF_MYSQL_DATABASE))
             print("Database created")
+
+            ravcom.create_tables()
 
 
 def reset():
@@ -36,6 +41,3 @@ def reset():
 
     # Clear redis queues
     clear_redis_queues()
-
-
-ravcom = DBManager.Instance()
