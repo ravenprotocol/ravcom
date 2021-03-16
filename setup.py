@@ -11,6 +11,10 @@ setup(
         "mysql-connector-python==8.0.23",
         "mysqlclient==2.0.1",
         "protobuf==3.15.5",
-        "six==1.15.0"
+        "six==1.15.0",
+        "aiohttp==3.6.2",
+        "async-timeout==3.0.1",
+        "python-engineio==3.13.0",
+        "python-socketio==4.5.1"
     ],
 )
