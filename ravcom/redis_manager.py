@@ -1,5 +1,6 @@
 import redis
-from .config import RDF_REDIS_HOST, RDF_REDIS_PORT, RDF_REDIS_DB
+from .config import RDF_REDIS_HOST, RDF_REDIS_PORT, RDF_REDIS_DB, QUEUE_LOW_PRIORITY, \
+    QUEUE_HIGH_PRIORITY, QUEUE_COMPUTING
 from .utils import Singleton
 
 
@@ -52,3 +53,10 @@ class RavQueue(object):
             return -1
 
 
+def clear_redis_queues():
+    r = RavQueue(QUEUE_HIGH_PRIORITY)
+    r.delete()
+    r1 = RavQueue(QUEUE_LOW_PRIORITY)
+    r1.delete()
+    r2 = RavQueue(QUEUE_COMPUTING)
+    r2.delete()

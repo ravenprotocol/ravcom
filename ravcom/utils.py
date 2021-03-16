@@ -1,14 +1,10 @@
-import contextlib
-import glob
 import json
 import os
 
 import numpy as np
-import sqlalchemy
 
 from ravcom.socket_client import SocketClient
-from .config import DATA_FILES_PATH, RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, \
-    RDF_MYSQL_PORT, RDF_MYSQL_HOST, RAVSOCK_SERVER_URL
+from .config import DATA_FILES_PATH, RAVSOCK_SERVER_URL
 
 
 def save_data_to_file(data_id, data):
@@ -55,26 +51,6 @@ class Singleton:
 
     def __instancecheck__(self, inst):
         return isinstance(inst, self._cls)
-
-
-def reset():
-    for file_path in glob.glob("files/*"):
-        if os.path.exists(file_path):
-            os.remove(file_path)
-
-    if not os.path.exists("files"):
-        os.makedirs("files")
-
-
-def delete_create_database():
-    with sqlalchemy.create_engine('mysql://{}:{}@{}:{}/{}'.format(RDF_MYSQL_USER, RDF_MYSQL_PASSWORD,
-                                                                  RDF_MYSQL_HOST, RDF_MYSQL_PORT, "mysql"),
-                                  isolation_level='AUTOCOMMIT').connect() as connection:
-        with contextlib.suppress(sqlalchemy.exc.ProgrammingError):
-            connection.execute("DROP DATABASE {}".format(RDF_MYSQL_DATABASE))
-            print("Database deleted")
-            connection.execute("CREATE DATABASE {}".format(RDF_MYSQL_DATABASE))
-            print("Database created")
 
 
 def dump_data(data_id, value):
