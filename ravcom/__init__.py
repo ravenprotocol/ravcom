@@ -9,8 +9,7 @@ from .config import QUEUE_LOW_PRIORITY, QUEUE_HIGH_PRIORITY, QUEUE_COMPUTING, RD
 from .db_manager import OpStatus, GraphStatus, ClientOpMappingStatus, Op, Graph, Data, Client, \
     ClientOpMapping, DBManager
 from .redis_manager import RavQueue, clear_redis_queues
-from .utils import dump_data, delete_data_file, save_data_to_file, inform_server
-
+from .utils import dump_data, delete_data_file, save_data_to_file, inform_server, Singleton
 
 ravcom = DBManager.Instance()
 
