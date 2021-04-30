@@ -1,17 +1,4 @@
-# ravcom
-Raven Distribution Framework's common library to talk to databases
+# RavCom
+RavCom is a common library that contains various methods to interact with the databases like MySQL, Redis, PostgreSQL, and others. It is a common library used in most of our libraries.
 
-## Set environment variables
-     # Redis
-
-    RDF_REDIS_HOST="localhost"
-    RDF_REDIS_PORT="6379"
-    RDF_REDIS_DB="0"
-
-    # MySQL
-    RDF_MYSQL_HOST="localhost"
-    RDF_MYSQL_PORT="3306"
-    RDF_MYSQL_USER="root"
-    RDF_MYSQL_PASSWORD="password"
-    RDF_MYSQL_DATABASE="rdf"
 
