@@ -7,8 +7,9 @@ import sqlalchemy as db
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey, or_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy_utils import database_exists, create_database as cd, drop_database as dba
 
-from .config import RDF_MYSQL_USER, RDF_MYSQL_DATABASE, RDF_MYSQL_PASSWORD, RDF_MYSQL_PORT, RDF_MYSQL_HOST
+from . import config
 from .utils import delete_data_file, save_data_to_file, Singleton
 
 Base = declarative_base()
@@ -128,16 +129,26 @@ class ClientOpMapping(Base):
 @Singleton
 class DBManager(object):
     def __init__(self):
-        self.engine = db.create_engine(
-            'mysql://{}:{}@{}:{}/{}?host={}?port={}'.format(RDF_MYSQL_USER, RDF_MYSQL_PASSWORD,
-                                                            RDF_MYSQL_HOST, RDF_MYSQL_PORT,
-                                                            RDF_MYSQL_DATABASE,
-                                                            RDF_MYSQL_HOST, RDF_MYSQL_PORT),
-            isolation_level="READ UNCOMMITTED")
-        self.connection = self.engine.connect()
-        Base.metadata.bind = self.engine
-        DBSession = sessionmaker(bind=self.engine)
-        self.session = DBSession()
+        self.create_database()
+        self.engine, self.session = self.connect()
+
+    def connect(self):
+        engine = db.create_engine(config.RDF_DATABASE_URI, isolation_level="READ UNCOMMITTED")
+        connection = engine.connect()
+        Base.metadata.bind = engine
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+        return engine, session
+
+    def create_database(self):
+        if not database_exists(config.RDF_DATABASE_URI):
+            cd(config.RDF_DATABASE_URI)
+            print("Database created")
+
+    def drop_database(self):
+        if database_exists(config.RDF_DATABASE_URI):
+            dba(config.RDF_DATABASE_URI)
+            print("Database dropped")
 
     def create_session(self):
         """
