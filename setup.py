@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ravcom',
-    version='0.1',
+    version='0.1-alpha',
     packages=find_packages(),
     install_requires=[
         "SQLAlchemy==1.3.23",
