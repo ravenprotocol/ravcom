@@ -403,6 +403,7 @@ class DBManager(object):
         Get op readiness
         """
         inputs = json.loads(op.inputs)
+        params = json.loads(op.params)
 
         cs = 0
         for input_op in inputs:
@@ -414,7 +415,19 @@ class DBManager(object):
             elif input_op1.status == "computed":
                 cs += 1
 
-        if cs == len(inputs):
+        for index, value in params.items():
+            if type(value).__name__ == "int":
+                cop = self.get_op(op_id=value)
+                if cop.status in ["pending", "computing"]:
+                    return "parent_op_not_ready"
+                elif cop.status == "failed":
+                    return "parent_op_failed"
+                elif cop.status == "computed":
+                    cs += 1
+            else:
+                cs += 1
+
+        if cs == len(inputs) + len(params.keys()):
             return "ready"
         else:
             return "not_ready"
