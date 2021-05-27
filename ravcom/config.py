@@ -14,4 +14,4 @@ QUEUE_COMPUTING = "queue:computing"
 
 RAVSOCK_SERVER_URL = os.environ.get("RAVSOCK_SERVER_URL", "http://0.0.0.0:9999")
 
-RDF_DATABASE_URI = os.environ.get("RDF_DATABASE_URI", None)
+RDF_DATABASE_URI = os.environ.get("RDF_DATABASE_URI", "sqlite:///rdf.db")
