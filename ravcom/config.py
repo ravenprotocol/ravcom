@@ -18,5 +18,5 @@ QUEUE_COMPUTING = "queue:computing"
 
 RAVSOCK_SERVER_URL = os.environ.get("RAVSOCK_SERVER_URL", "http://0.0.0.0:9999")
 
-RDF_DATABASE_URI = "sqlite:///{}/rdf.db".format(BASE_DIR)
+RDF_DATABASE_URI = os.environ.get("RDF_DATABASE_URI", "sqlite:///{}/rdf.db".format(BASE_DIR))
 RDF_REDIS_URI = os.environ.get("RDF_REDIS_URI", "redis://localhost:6379?db=0")
