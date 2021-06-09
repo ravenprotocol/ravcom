@@ -1,8 +1,12 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from os.path import expanduser
 
+BASE_DIR = os.path.join(expanduser("~"), ".rdf")
 DATA_FILES_PATH = os.path.join(BASE_DIR, "files")
+
+os.makedirs(BASE_DIR, exist_ok=True)
+os.makedirs(DATA_FILES_PATH, exist_ok=True)
 
 RDF_REDIS_HOST = os.environ.get("RDF_REDIS_HOST", "localhost")
 RDF_REDIS_PORT = os.environ.get("RDF_REDIS_PORT", "6379")
@@ -14,4 +18,5 @@ QUEUE_COMPUTING = "queue:computing"
 
 RAVSOCK_SERVER_URL = os.environ.get("RAVSOCK_SERVER_URL", "http://0.0.0.0:9999")
 
-RDF_DATABASE_URI = os.environ.get("RDF_DATABASE_URI", "sqlite:///rdf.db")
+RDF_DATABASE_URI = "sqlite:///{}/rdf.db".format(BASE_DIR)
+RDF_REDIS_URI = os.environ.get("RDF_REDIS_URI", "redis://localhost:6379?db=0")
