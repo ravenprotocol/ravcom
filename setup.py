@@ -8,8 +8,6 @@ setup(
         "SQLAlchemy==1.3.23",
         "numpy==1.20.1",
         "redis==3.5.3",
-        "mysql-connector-python==8.0.23",
-        "mysqlclient==2.0.3",
         "protobuf==3.15.5",
         "six==1.15.0",
         "aiohttp==3.6.2",
