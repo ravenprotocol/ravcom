@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 
 import numpy as np
 
@@ -63,6 +64,21 @@ def dump_data(data_id, value):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     value.dump(file_path)
     return file_path
+
+
+def copy_data(source, destination):
+    try:
+        shutil.copy(source, destination)
+        print("File copied successfully.")
+    # If source and destination are same
+    except shutil.SameFileError:
+        print("Source and destination represents the same file.")
+    # If there is any permission issue
+    except PermissionError:
+        print("Permission denied.")
+    # For other errors
+    except:
+        print("Error occurred while copying file.")
 
 
 def inform_server():
